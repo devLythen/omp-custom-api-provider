@@ -1,0 +1,22 @@
+{
+  "name": "omp-custom-api-provider",
+  "version": "1.0.0",
+  "description": "Oh My Pi extension: add multiple custom AI API providers (base URL, API key, wire protocol). Models are discovered from /v1/models; thinking levels reuse OMP's built-in /model selector.",
+  "license": "MIT",
+  "omp": {
+    "extensions": ["./index.ts"]
+  },
+  "files": [
+    "index.ts",
+    "store.ts",
+    "package.json",
+    "README.md"
+  ],
+  "keywords": [
+    "omp",
+    "oh-my-pi",
+    "extension",
+    "custom-api",
+    "provider"
+  ]
+}
