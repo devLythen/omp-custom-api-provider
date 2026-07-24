@@ -59,7 +59,8 @@ After restart, configs load from disk and `pi.registerProvider` runs at extensio
 | contextWindow / maxTokens / thinking map | Not hard-coded when id matches catalog | `finalizeCustomModel` + bundled reference index |
 | Thinking effort UI | Sets `reasoning: true` on models | `/model` selector + request shaping (`reasoning_effort`, etc.) |
 | Unregister | `clearSourceRegistrations("custom-api:<id>")` | Registry cleanup |
-| Credential storage | `~/.omp/agent/custom-apis.json` (+ optional env var) | Optional `/login` list via `oauth.login` |
+| Credential storage | `~/.omp/agent/custom-apis.json` (+ optional env var) | `authStorage` login api_key + config override (Task/subagent) |
+| `/login` list entry | `oauth.login` returns stored/env key | Built-in provider picker |
 
 ## Configuration storage
 
