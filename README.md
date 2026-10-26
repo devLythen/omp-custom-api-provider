@@ -29,11 +29,16 @@ Restart `omp`.
 
 | Command | Description |
 |---------|-------------|
+| `/custom-api` | Interactive menu with quick actions for managing providers |
 | `/custom-api add` | Interactive wizard: id, name, protocol, base URL, API key; fetches `/models` and registers |
-| `/custom-api list` | List configured providers and whether a key is present |
-| `/custom-api edit <id>` | Update base URL / key; re-fetch models; re-register live |
-| `/custom-api remove <id>` | Delete config and clear runtime registration (`clearSourceRegistrations`) |
+| `/custom-api list` (or `ls`) | Clean formatted list of configured providers, key status, and registered models |
+| `/custom-api models [id]` | View all registered models for a provider (supports interactive picker if `id` omitted) |
+| `/custom-api test [id]` | Test connection, latency, and `/models` endpoint live; prompt to sync discovered models |
+| `/custom-api edit [id]` | Update name, protocol, base URL, key, or models; prompt to refetch models live |
+| `/custom-api remove [id]` (or `rm`) | Delete config and clear runtime registration (`clearSourceRegistrations`) |
 | `/custom-api reload` | Re-read disk and re-`pi.registerProvider` (startup-style) |
+
+Full tab-completion is supported for subcommands and provider IDs (e.g. `/custom-api edit <Tab>`, `/custom-api test <Tab>`).
 
 ## Usage order
 
@@ -41,9 +46,9 @@ Restart `omp`.
    - **Provider ID** — internal id (`my-gateway` → `my-gateway/<model-id>`, `/login my-gateway`)
    - **Display name** — human label in selectors
    - **API protocol** — wire format OMP uses for requests
-   - **Base URL** — e.g. `https://api.example.com/v1` (path matters for `/models`)
-   - **API key** — either a secret string **or** an env var name like `MY_GATEWAY_KEY`
-2. Wait for “Found N model(s)” if the key works and `/models` is OpenAI-compatible.
+   - **Base URL** — e.g. `https://api.example.com/v1` (include `/v1` when applicable)
+   - **API key** — literal secret string (e.g. `sk-...`, `m365_...`) **or** an env var (e.g. `$MY_KEY` or `OPENAI_API_KEY`)
+2. Auto-discovery fetches `/models`. If the endpoint fails or requires manual models, you can enter model IDs manually.
 3. Open `/model` — provider + models should appear after live `modelRegistry.registerProvider`.
 4. Pick a model and set **thinking level** in the same UI (`off` / `minimal` / `low` / `medium` / `high` / `xhigh` / `max`) when the model supports reasoning.
 5. Optional: `/login <id>` surfaces the provider in the built-in login list via the registered `oauth.login` callback (key still comes from this extension’s store / env).
